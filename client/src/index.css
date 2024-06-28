@@ -1,0 +1,397 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  background:#e8f2fe
+}
+.App{
+  width: 100vw;
+  height: 100%;
+  /* background: #000; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   
+}
+.navbar{
+  z-index: 10;
+  display: flex;
+  /* color: black; */
+  justify-content: space-between;
+  align-items: center;
+
+  /* width: 1070px;; */
+  height: 70px;
+  width: 1070px;
+  padding: 10px;
+  /* margin-left:15%; 
+  margin-right:15%;  */
+  margin-bottom: 20px;
+  /* border: 2px solid wheat; */
+  border-radius: 10px ;
+  position: fixed;
+  background-color: #ffffff;
+  box-shadow: 5px 5px 19px 1px rgb(210, 236, 245);
+}
+
+
+.search-bar-icon{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.navbar-search{
+  width: 400px;
+  background: #242323;
+  border-radius: 20px;
+  color:  #9e9b9b ;
+  padding: 12px;
+  border: 2px solid  #242323;
+   ;
+}
+.search-icon{
+  position: absolute;
+  right: 10px;
+  color: white;
+  
+}
+.navbar ul{
+  display: flex; 
+  gap:5px ;
+  /* color: white; */
+
+}
+.title{
+  text-decoration: none;
+  color: black;
+  font-size: 17px;
+  font-weight: 600;
+
+}
+.link-text{
+  text-decoration: none;
+  color: black;
+}
+.login-btn{
+  display: flex;
+  gap :5px ;
+}
+
+.nav-btn{
+  color: white;
+  background: #383737;
+  border-radius:8px ;
+  border: 1px solid rgb(86, 84, 84);
+  padding: 4px   ;
+}
+
+.home{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size:30px;
+  font-weight: 600;
+  color: white;
+}
+.filter-dashboard{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* width: 1070px; */
+  
+}
+.Filter-container{
+  margin-top: 100px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items:center;
+  justify-content: space-evenly;
+  gap: 5px;
+  height: 40px;
+  width: 1065px;
+  border: 2px solid rgb(179, 178, 178);
+  border-radius: 10px;
+  background: white;
+  /* width: 1070px; */
+}
+.Filter-container button{
+  width: 70px;
+}
+.dashboard{
+  display: flex;
+  width: 1070px;
+  /* max-width: 1160px; */
+  padding: 4px;
+  margin-left:15%; 
+  margin-right:15%; 
+  /* margin-top: 100px; */
+  flex-wrap: wrap;
+  /* border: 2px solid wheat; */
+  gap: 10px;
+  justify-content: space-between;
+ 
+}
+.card{
+  color: black;
+  display: flex;
+  width: 520px;
+  background: white;
+  border: 2px solid white;
+  height: 280px;
+  /* width:290px; */
+  border-radius: 20px;
+  text-align: left;
+  box-shadow: 5px 5px 3px 2px rgb(220, 242, 249);
+}
+
+.card-img{
+  height: 260px;
+  width:270px;
+  margin: 10px;
+  border-radius:10px 0px 0px 10px ;
+}
+.card-text{
+  padding: 10px;
+  /* border: 2px solid black; */
+}
+.card-name{
+ font-size: 18px ;
+ font-weight: 700 ;
+
+}
+
+.description{
+  font-size: 10px;
+  font-weight: 100;
+  color: #616161;
+  height: 100px;
+}
+.location{
+  font-size: 12px;
+  font-weight: 100;
+  color: #4f4f4f;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.card-price{
+  align-items: center;
+  display: flex;
+  /* justify-content: center; */
+  color: #619304;
+}
+
+.card-btn{
+  /* margin-top: 100px; */
+  border-radius: 20px ;
+  border: 2px solid black;
+  padding: 7px;
+  width: 200px;
+}
+.card-btn:hover{
+  color: white;
+  background-color: black;
+  transition: all o.3sec;
+}
+.card:hover{
+  box-shadow:5px 0px 10px 5px lightblue ;
+  transition: all 2sec;
+}
+.template{
+  width: 11/12;
+  max-width: 1160px;
+  /* padding: 12; */
+  margin-left:15%; 
+  margin-right:15%;
+  margin-top: 100px; 
+  display: flex;
+  /* gap:12px; */
+  justify-content: space-between;
+  text-align: left;
+  
+}
+
+.form-div{
+  display: flex;
+  width: 450px;
+  flex-direction: column;
+  /* border: 2px solid white; */
+}
+.form-div h1{
+  color: rgb(58, 57, 57);
+  font-size:1.875rem ;
+  font-weight: bold;
+  line-height: 2.375rem;
+  
+}
+
+.form-div p{
+  font-weight: 400;
+  font-size:15px ;
+  /* color: white; */
+}
+
+.desc1{
+  color: rgb(163, 160, 160);
+}
+.desc2{
+  font-style: italic;
+  color: rgb(75, 167, 247);
+}
+
+.or-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+.or-text{
+  color:#5e5d5d;
+}
+.line{
+  height: 1px;
+  width: 100%;
+  background-color: #5e5d5d;
+}
+
+.lgin-with-google-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-size: medium;
+  padding: 7px 12px 7px 12px;
+  margin-top: 3px;
+  gap :6;
+  color: #5e5d5d;
+  background-color: black;
+  border: 1px solid #5e5d5d;
+
+}
+
+.img-div{
+  /* width: 558px; */
+  position: relative;
+}
+
+.img1{
+  position: absolute;
+  /* width: 300px; */
+  top :-14px;
+  left:-14px;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  gap:4px  ;
+  margin-top: 6px;
+  /* border: 2px solid wheat; */
+}
+
+.login-form label{
+  width: 100%;
+  color: #9e9b9b;
+}
+
+.login-form p{
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+}
+
+.login-form sup{
+  color: red;
+}
+
+.login-form input{
+  width: 100%;
+  background: #242323;
+  border-radius: 0.5rem;
+  color:  #9e9b9b ;
+  padding: 12px;
+  border: 2px solid  #242323;
+   ;
+}
+.login-form textarea{
+  width: 100%;
+  background: #242323;
+  border-radius: 0.5rem;
+  color:  #9e9b9b ;
+  padding: 12px;
+  border: 2px solid  #242323;
+   ;
+}
+
+.password-div{
+  position: relative;
+}
+
+.login-form span{
+  position: absolute;
+  right: 10px;
+  top:40px;
+
+}
+
+.forgot-password p{
+  text-align: right;
+  width: 100%;
+  color: rgb(100, 162, 255);
+  /* border: 2px solid white; */
+}
+
+.signin-btn{
+  background-color: rgb(255, 162, 0);
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: black;
+  border: 2px solid  rgb(255, 162, 0);
+  margin-top: 30px;
+}
+
+.signup-name{
+  display: flex;
+  gap: 4px;
+}
+
+.student-instr-btn{
+  margin: 5px;
+  display: flex;
+  border-radius: 20px;
+  background-color: #242323;
+  padding: 2px;
+  color: #9e9b9b;
+  width: 200px;
+  height: 35px;
+}
+
+
+ .no-click{
+  background:#242323;
+  height: 100%;
+  width: 50%;
+  border-radius: 20px;
+  border: 1px solid #242323;
+  color: #9e9b9b;
+} 
+
+.student{
+  height: 100%;
+  width: 50%;
+  border-radius: 20px;
+  border: 1px solid #242323;
+  background: #000;
+  color: white;
+
+  transition: all 0.3sec;
+}
