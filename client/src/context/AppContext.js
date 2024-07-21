@@ -51,7 +51,13 @@ function AppContextProvider({children}){
         const data = await res.json();
         console.log("successful",data);
         setAllPosts(data);
-        setPosts(data);
+        setPosts(()=>{
+            return (
+              allPosts.filter((post)=>{
+               return post.user !== user._id ;
+              })
+            )
+          })
         }catch(err){
             console.log("got error",err);
         }

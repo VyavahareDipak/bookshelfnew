@@ -23,10 +23,23 @@ function Navbar() {
   };
 
   const myPostHandler = async () => {
-    setQuery(user._id);
-    fetchData();
+    setPosts(()=>{
+      return (
+        allPosts.filter((post)=>{
+         return post.user === user._id ;
+        })
+      )
+    })
   };
-
+  const dashbordHandler = async()=>{
+    setPosts(()=>{
+      return (
+        allPosts.filter((post)=>{
+         return post.user !== user._id ;
+        })
+      )
+    })
+  };
   return (
     <div className="bg-white shadow-md p-4 flex justify-between items-center">
       <Link to='/' className="text-xl font-bold text-gray-800">
@@ -67,9 +80,11 @@ function Navbar() {
             <Link to='/'>
               <button className="bg-blue-500   text-white px-4 py-2 rounded-md" onClick={logoutHandler}>Logout</button>
             </Link>
-            <Link to='/dashboard'>
+           
+            <button onClick={dashbordHandler}>
               <button className="bg-blue-500  text-white px-4 py-2 rounded-md">Dashboard</button>
-            </Link>
+            </button>
+           
           </>
         )}
       </div>
@@ -126,16 +141,16 @@ function Navbar() {
                 setIsMenuOpen(false);
               }}>My Posts</button>
               <Link to='/sendPost' onClick={() => setIsMenuOpen(false)}>
-                <button className="bg-blue-500 text-white w-1 py-2 rounded-md mb-2">Sell Book</button>
+                <button className="bg-blue-500 text-white w-full px-4 py-2 rounded-md mb-2">Sell </button>
               </Link>
               <Link to='/' onClick={() => {
                 logoutHandler();
                 setIsMenuOpen(false);
               }}>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2">Logout</button>
+                <button className="bg-blue-500 text-white w-full px-4 py-2 rounded-md mb-2">Logout</button>
               </Link>
               <Link to='/dashboard' onClick={() => setIsMenuOpen(false)}>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Dashboard</button>
+                <button className="bg-blue-500 text-white w-full px-4 py-2 rounded-md">Dashboard</button>
               </Link>
             </>
           )}
@@ -146,3 +161,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+

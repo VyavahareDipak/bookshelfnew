@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 import toast from "react-hot-toast";
 import { FaLocationDot } from "react-icons/fa6";
 import { AppContext } from "../context/AppContext";
-
+import { Link, useNavigate } from "react-router-dom";
 function Card({ post }) {
     const [loading, setLoading] = useState(false);
-    const { user } = useContext(AppContext);
+    const { user,posts,setPosts ,allPosts,setAllPosts} = useContext(AppContext);
 
     async function buyHandler() {
         setLoading(true);
@@ -38,6 +38,13 @@ function Card({ post }) {
     }
 
     async function deleteHandler() {
+        setLoading(true) 
+        setPosts(()=>{
+            return posts.filter((post1)=> post1._id!==post._id)
+        })
+        setAllPosts(()=>{
+            return allPosts.filter((post1)=> post1._id!==post._id) ;
+        })
         try {
             const res = await fetch("/api/v1/remove/post", {
                 method: "POST",
@@ -53,11 +60,15 @@ function Card({ post }) {
             const data = await res.json();
             if (data.success) {
                 toast.success("Post deleted successfully");
+                
             }
         } catch (err) {
             toast.error("Try after some time");
             console.log(err);
+            posts.append(post);
+             setPosts(post) ;
         }
+        setLoading(false);
     }
 
     return (
@@ -79,7 +90,7 @@ function Card({ post }) {
                             </div>
                             <p className="text-lg font-bold text-gray-900 mb-4">₹ {post.price}</p>
                             <div className="flex justify-between">
-                                {user._id !== post.user._id && (
+                                {user._id !== post.user && (
                                     <button
                                         onClick={buyHandler}
                                         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-150"
@@ -87,13 +98,12 @@ function Card({ post }) {
                                         Buy Now
                                     </button>
                                 )}
-                                {user._id === post.user._id && (
-                                    <button
-                                        onClick={deleteHandler}
+                                {user._id === post.user && (
+                                    <Link to="/dashboard" onClick={deleteHandler}
                                         className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-150"
                                     >
                                         Delete Post
-                                    </button>
+                                    </Link>
                                 )}
                             </div>
                         </div>

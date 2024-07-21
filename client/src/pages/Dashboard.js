@@ -31,7 +31,7 @@ function DashBoard() {
     useEffect(() => {
         fetchData();
     }, []);
-
+    
     return (
         <div className="p-4 md:p-8 lg:p-12">
             <div className="mb-4 p-4 border border-gray-300 rounded-lg bg-white shadow-md">
