@@ -1,88 +1,148 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-// import { useDispatch, useSelector } from "react-redux";
-// import { update } from "../redux/slices/searchSlice";
 import { AppContext } from "../context/AppContext";
-import { IoMdSearch } from "react-icons/io";
+import { IoMdSearch, IoMdMenu, IoMdClose } from "react-icons/io";
 
-function Navbar(){
-   const navigate = useNavigate();
-   const {islogin,setIslogin,query,setQuery,setPosts,allPosts,fetchData,user} = useContext(AppContext);
-   const [filteredPost,setFilteredPost] = [] ;
-    function logoutHandler(){
-            setIslogin(false);
-            navigate('/login');
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            toast.success("logged out successfully")
-    }
-    function queryHandler(e){
-      setQuery(e.target.value);
-      console.log(query);
-  }
-  async function myPostHandler(){
-      setQuery(user._id) ;
-      fetchData() ;
-  }
-    return(
-        <div className="navbar">
-           <Link to='/' className="title">
-           <p >BookShelf.com</p>
-           </Link>
-           <div className="search-bar-icon" >
-            <input
-            className="navbar-search"
-            placeholder="search"
+function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const { islogin, setIslogin, query, setQuery, setPosts, allPosts, fetchData, user } = useContext(AppContext);
+
+  const logoutHandler = () => {
+    setIslogin(false);
+    navigate('/login');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    toast.success("Logged out successfully");
+  };
+
+  const queryHandler = (e) => {
+    setQuery(e.target.value);
+    console.log(query);
+  };
+
+  const myPostHandler = async () => {
+    setQuery(user._id);
+    fetchData();
+  };
+
+  return (
+    <div className="bg-white shadow-md p-4 flex justify-between items-center">
+      <Link to='/' className="text-xl font-bold text-gray-800">
+        BookShelf.com
+      </Link>
+      
+      {/* Desktop Menu */}
+      <div className="hidden md:flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
+          <input
+            className="border border-gray-300 p-2 rounded-md"
+            placeholder="Search"
             value={query}
             onChange={queryHandler}
-            >
-            </input>
-            <IoMdSearch className="search-icon" onClick={()=>{
-               setPosts(()=>{
-                 return allPosts.filter((post)=>{
-                     return post.name.toLowerCase().includes(query) ;
-                     console.log(post.name) ;
-                  })
-               })
-            }}/>
-            </div>
-           <div className="login-btn">
-               { !islogin &&
-                 <Link to='/login'>
-                    <button className="nav-btn">Login</button>
-                 </Link>
-               }
-               { !islogin &&
-                 <Link to='/signup'>
-                    <button className="nav-btn" >Signup</button>
-                 </Link>
-               }
-               {
-                  islogin &&
-                     <button className="nav-btn" onClick={myPostHandler}>My Posts</button>
-                  
-               }
-               {
-                  islogin &&
-                  <Link to ='/sendPost'>
-                     <button className="nav-btn" >Sell Book</button>
-                  </Link>
-               }
-               { islogin &&
-                 <Link to='/'>
-                    <button className="nav-btn" onClick={logoutHandler}>Logout</button>
-                 </Link>
-               }
-               { islogin &&
-                 <Link to='/'>
-                    <button className="nav-btn">Dashboard</button>
-                 </Link>
-               }
-               
-            </div>
+          />
+          <IoMdSearch
+            className="text-gray-500 cursor-pointer"
+            onClick={() => {
+              setPosts(() => allPosts.filter((post) => post.name.toLowerCase().includes(query)));
+            }}
+          />
         </div>
-    )
+        {!islogin ? (
+          <>
+            <Link to='/login'>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Login</button>
+            </Link>
+            <Link to='/signup'>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Signup</button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <button className="bg-blue-500  text-white px-4 py-2 rounded-md" onClick={myPostHandler}>My Posts</button>
+            <Link to='/sendPost'>
+              <button className="bg-blue-500   text-white px-4 py-2 rounded-md">Sell</button>
+            </Link>
+            <Link to='/'>
+              <button className="bg-blue-500   text-white px-4 py-2 rounded-md" onClick={logoutHandler}>Logout</button>
+            </Link>
+            <Link to='/dashboard'>
+              <button className="bg-blue-500  text-white px-4 py-2 rounded-md">Dashboard</button>
+            </Link>
+          </>
+        )}
+      </div>
+      
+      {/* Mobile Menu Button */}
+      <div className="md:hidden flex items-center">
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? (
+            <IoMdClose className="text-gray-800 text-2xl" />
+          ) : (
+            <IoMdMenu className="text-gray-800 text-2xl" />
+          )}
+        </button>
+      </div>
+      
+      {/* Mobile Menu */}
+      <div className={`fixed inset-0 bg-white shadow-md p-4 z-50 transform transition-transform ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
+        <div className="flex items-center justify-between">
+          <Link to='/' className="text-xl font-bold text-gray-800">
+            BookShelf.com
+          </Link>
+          <button onClick={() => setIsMenuOpen(false)}>
+            <IoMdClose className="text-gray-800 text-2xl" />
+          </button>
+        </div>
+        <div className="flex flex-col mt-4">
+          <div className="flex items-center space-x-2 mb-4">
+            <input
+              className="border border-gray-300 p-2 rounded-md"
+              placeholder="Search"
+              value={query}
+              onChange={queryHandler}
+            />
+            <IoMdSearch
+              className="text-gray-500 cursor-pointer"
+              onClick={() => {
+                setPosts(() => allPosts.filter((post) => post.name.toLowerCase().includes(query)));
+              }}
+            />
+          </div>
+          {!islogin ? (
+            <>
+              <Link to='/login' onClick={() => setIsMenuOpen(false)}>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2">Login</button>
+              </Link>
+              <Link to='/signup' onClick={() => setIsMenuOpen(false)}>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2">Signup</button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <button className="bg-blue-500 text-white  px-4 py-2 rounded-md mb-2" onClick={() => {
+                myPostHandler();
+                setIsMenuOpen(false);
+              }}>My Posts</button>
+              <Link to='/sendPost' onClick={() => setIsMenuOpen(false)}>
+                <button className="bg-blue-500 text-white w-1 py-2 rounded-md mb-2">Sell Book</button>
+              </Link>
+              <Link to='/' onClick={() => {
+                logoutHandler();
+                setIsMenuOpen(false);
+              }}>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2">Logout</button>
+              </Link>
+              <Link to='/dashboard' onClick={() => setIsMenuOpen(false)}>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md">Dashboard</button>
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Navbar ;
+export default Navbar;

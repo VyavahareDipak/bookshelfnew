@@ -1,7 +1,7 @@
 import './App.css';
 import { Route,Routes } from 'react-router-dom';
 import Navbar from './components/Navbar' ;
-// import Home from './pages/Home';
+ import Home from './pages/Home';
 import Login from './pages/Login';
 import DashBoard from './pages/Dashboard';
 import Signup from './pages/Signup';
@@ -19,7 +19,7 @@ function App() {
       <Navbar islogin={islogin} />
 
       <Routes>
-        {/* <Route path='/' element={<Home/>}></Route> */}
+        <Route path='/' element={<Home/>}></Route>
         {/* passing props to components in route */}
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
@@ -28,7 +28,7 @@ function App() {
           <SendPost/>
           </PrivateRoute>}></Route>
       {/* making dashboard private route so we can redirect to dashboard only if logged in */}
-        <Route path='/' element=
+        <Route path='/dashboard' element=
         {
         <PrivateRoute >
           <DashBoard/>
